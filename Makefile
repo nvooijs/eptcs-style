@@ -7,4 +7,4 @@ clean:
 	latexmk -C
 
 dist: clean
-	zip eptcsstyle.zip generic.bib eptcs.cls *.bst example.tex
+	zip eptcsstyle.zip generic.bib eptcs.cls *.bst *.bbx example.tex

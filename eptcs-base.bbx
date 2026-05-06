@@ -1,5 +1,6 @@
 % Copyright © 2026 Niels C. Vooijs
-\ProvidesFile{eptcs-base.bbx}[2026/04/29 EPTCS biblatex base bibliography style]
+\ProvidesFile{eptcs-base.bbx}
+[2026/05/06 EPTCS biblatex base bibliography style]
 
 \RequirePackage{numname}
 
@@ -215,6 +216,18 @@
         }%
 }
 
+\newbibmacro*{proceedings-organization}{%
+    \ifthenelse{
+        \ifentrytype{inproceedings}
+        \or
+        \ifentrytype{proceedings}
+        \or
+        \ifentrytype{mvproceedings}
+    }
+        {\printlist{organization}}
+        {}%
+}
+
 \newbibmacro*{publisher+location}{%
     \iflistundef{publisher}
         {}
@@ -274,6 +287,8 @@
     \newunit
     \usebibmacro{series+number}%
     \newunit
+    \usebibmacro{proceedings-organization}%
+    \newunit
     \usebibmacro{publisher+location}%
     \setunit{\bibpagespunct}\printfield{pages}%
     \newunitblock
@@ -293,6 +308,8 @@
     \printfield{edition}%
     \newunitblock
     \usebibmacro{series+number}%
+    \newunit
+    \usebibmacro{proceedings-organization}%
     \newunit
     \usebibmacro{publisher+location}%
     \newunit
@@ -320,7 +337,7 @@
     \usebibmacro{author+year+title}%
     \newunitblock
     \printfield{type}%
-    \ifdriver{report}
+    \ifentrytype{report}
         {%
             \setunit{\addspace}
             \printfield{number}%
